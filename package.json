@@ -3,5 +3,8 @@
   "version": "0.0.1",
   "main": "Api de la Web Intalnet",
   "author": "Nestor Sanchez",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "6.6.1"
+  }
 }
