@@ -4,7 +4,11 @@
   "main": "Api de la Web Intalnet",
   "author": "Nestor Sanchez",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
+    "express": "4.18.1",
     "mongoose": "6.6.1"
   }
 }
