@@ -1,6 +1,6 @@
 const DB_USER = "admin";
-const DB_PASSWORD = "admin123456";
-const DB_HOST = "cluster0.ktcdhcn.mongodb.net";
+const DB_PASSWORD = "Nestor123456";
+const DB_HOST = "secondpageintalnet.ld9gasl.mongodb.net";
 
 const API_VERSION = "v1";
 const IP_SERVER = "localhost";
