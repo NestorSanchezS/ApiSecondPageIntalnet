@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
-const jwt = require("jsonwebtoken");
+const jwt = require("../utils/jwt");
 
 function register(req, res) {
   const { firstName, lastName, email, password } = req.body;
@@ -30,8 +30,8 @@ function register(req, res) {
 
 function login(req, res) {
   const { email, password } = req.body;
-  if (!email) res.status(401).send({ msg: "El email es obligatorio" });
-  if (!password) res.status(401).send({ msg: "La contraseña  es obligatorio" });
+  if (!email) res.status(400).send({ msg: "El email es obligatorio" });
+  if (!password) res.status(400).send({ msg: "La contraseña  es obligatorio" });
 
   const emailLowercase = email.toLowerCase();
 
@@ -47,7 +47,10 @@ function login(req, res) {
         } else if (!userStore.active) {
           res.status(401).send({ msg: "Usuario no autorizado o no activo" });
         } else {
-          res.status(200).send({ result: "OK" });
+          res.status(200).send({
+            access: jwt.createAccessToken(userStore),
+            refresh: jwt.createRefreshToken(userStore),
+          });
         }
       });
     }

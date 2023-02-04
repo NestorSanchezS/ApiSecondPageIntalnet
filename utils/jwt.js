@@ -1,4 +1,4 @@
-const jwt = requiere("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const { JWT_SECRET_KEY } = require("../constans");
 
 function createAccessToken(user) {
@@ -16,6 +16,7 @@ function createAccessToken(user) {
 }
 
 function createRefreshToken(user) {
+  const expToken = new Date();
   expToken.getMonth(expToken.getMonth() + 1);
 
   const payload = {
