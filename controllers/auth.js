@@ -37,13 +37,13 @@ function login(req, res) {
 
   User.findOne({ email: emailLowercase }, (error, userStore) => {
     if (error) {
-      res.status(404).send({ msg: "Error del servidor" });
+      res.status(500).send({ msg: "Error del servidor" });
     } else {
       bcrypt.compare(password, userStore.password, (bcryptError, check) => {
         if (bcryptError) {
           res.status(500).send({ msg: "Error del servidor" });
         } else if (!check) {
-          res.status(500).send({ msg: "Contraseña incorrecta" });
+          res.status(400).send({ msg: "Contraseña incorrecta" });
         } else if (!userStore.active) {
           res.status(401).send({ msg: "Usuario no autorizado o no activo" });
         } else {
@@ -57,7 +57,7 @@ function login(req, res) {
   });
 }
 
-function refreshAccesToken(req, res) {
+function refreshAccessToken(req, res) {
   const { token } = req.body;
 
   if (!token) res.status(400).send({ msg: "Token requerido" });
@@ -69,7 +69,7 @@ function refreshAccesToken(req, res) {
       res.status(500).send({ msg: "Error del servidor" });
     } else {
       res.status(200).send({
-        accesToken: jwt.createAccessToken(userStorage),
+        accessToken: jwt.createAccessToken(userStorage),
       });
     }
   });
@@ -78,5 +78,5 @@ function refreshAccesToken(req, res) {
 module.exports = {
   register,
   login,
-  refreshAccesToken,
+  refreshAccessToken,
 };
