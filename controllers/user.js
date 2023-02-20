@@ -11,6 +11,8 @@ async function getMe(req, res) {
   }
 }
 
+//All the users
+
 module.exports = {
   getMe,
 };
