@@ -11,8 +11,11 @@ async function getMe(req, res) {
   }
 }
 
-//All the users
+async function getUsers(req, res) {
+  res.status(200).send({ msg: "OK" });
+}
 
 module.exports = {
   getMe,
+  getUsers,
 };

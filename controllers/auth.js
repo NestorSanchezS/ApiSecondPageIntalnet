@@ -3,13 +3,13 @@ const User = require("../models/user");
 const jwt = require("../utils/jwt");
 
 function register(req, res) {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstname, lastname, email, password } = req.body;
   if (!email) res.status(400).send({ msg: "El email es obligatorio" });
   if (!password) res.status(400).send({ msg: "La contraseña es obligatorio" });
 
   const user = new User({
-    firstName,
-    lastName,
+    firstname,
+    lastname,
     email: email.toLowerCase(),
     role: "user",
     active: false,
