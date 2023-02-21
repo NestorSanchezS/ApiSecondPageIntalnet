@@ -30,8 +30,12 @@ function register(req, res) {
 
 function login(req, res) {
   const { email, password } = req.body;
-  if (!email) res.status(400).send({ msg: "El email es obligatorio" });
-  if (!password) res.status(400).send({ msg: "La contraseña  es obligatorio" });
+  if (!email) {
+    return res.status(400).send({ msg: "El email es obligatorio" });
+  }
+  if (!password) {
+    return res.status(400).send({ msg: "La contraseña  es obligatorio" });
+  }
 
   const emailLowercase = email.toLowerCase();
 
