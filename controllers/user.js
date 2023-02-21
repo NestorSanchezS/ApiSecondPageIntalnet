@@ -23,7 +23,14 @@ async function getUsers(req, res) {
 
   res.status(200).send(response);
 }
+
+async function createUser(req, res) {
+  console.log(req.body);
+  res.status(200).send({ msg: "OK" });
+}
+
 module.exports = {
   getMe,
   getUsers,
+  createUser,
 };
