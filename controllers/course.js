@@ -11,6 +11,25 @@ async function createCourse(req, res) {
   });
 }
 
+async function getCourses(req, res) {
+  const { active } = req.query;
+
+  let response = null;
+
+  if (active === undefined) {
+    response = await Course.find();
+  } else {
+    response = await Course.finf({ active });
+  }
+
+  if (!response) {
+    res.status(400).send({ nsg: "No se ha encontrado ningun curso" });
+  } else {
+    res.status(200).send(response);
+  }
+}
+
 module.exports = {
   createCourse,
+  getCourses,
 };

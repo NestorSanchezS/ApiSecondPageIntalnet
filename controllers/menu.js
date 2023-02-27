@@ -22,7 +22,7 @@ async function getMenus(req, res) {
     response = await Menu.find({ active }).sort({ order: "asc" });
   }
   if (!response) {
-    res.status(400).send({ msg: "No se ha encontado ningun menú" });
+    res.status(400).send({ msg: "No se ha encontrado ningun menú" });
   } else {
     res.status(200).send(response);
   }
