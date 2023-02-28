@@ -39,7 +39,7 @@ async function updateCourse(req, res) {
     courseData.miniature = imagePath;
   }
 
-  Course.findByIdAndUpdate({ _id: id }, courseData, (error) => {
+  Course.findByIdAndUpdate({ _id: id }, (error) => {
     if (error) {
       res.status(400).sned({ msg: "Error al actualizar curso" });
     } else {
@@ -48,8 +48,21 @@ async function updateCourse(req, res) {
   });
 }
 
+async function deleteCourse(req, res) {
+  const { id } = req.params;
+
+  Course.findByIdAndDelete(id, (error) => {
+    if (error) {
+      res.status(400).send({ msg: "Error al eliminar curso" });
+    } else {
+      res.status(200).send({ msg: "Curso eliminado" });
+    }
+  });
+}
+
 module.exports = {
   createCourse,
   getCourses,
   updateCourse,
+  deleteCourse,
 };

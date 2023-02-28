@@ -17,5 +17,6 @@ api.patch(
   [md_auth.asureAuth, md_upload],
   CourseController.updateCourse
 );
+api.delete("/course/:id", [md_auth.asureAuth], CourseController.deleteCourse);
 
 module.exports = api;
