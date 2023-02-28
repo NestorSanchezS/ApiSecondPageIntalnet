@@ -40,7 +40,7 @@ async function updateCourse(req, res) {
     courseData.miniature = imagePath;
   }
 
-  Course.findByIdAndUpdate({ _id: id }, (error) => {
+  Course.findByIdAndUpdate({ _id: id }, courseData, (error) => {
     if (error) {
       res.status(400).sned({ msg: "Error al actualizar curso" });
     } else {

@@ -31,4 +31,34 @@ function getPosts(req, res) {
   });
 }
 
-module.exports = { createPost, getPosts };
+function updatePost(req, res) {
+  const { id } = req.params;
+  const postData = req.body;
+
+  if (req.files.miniature) {
+    const imagePath = image.getFilePath(req.files.miniature);
+    postData.miniature = imagePath;
+  }
+
+  Post.findByIdAndUpdate({ _id: id }, postData, (error) => {
+    if (error) {
+      res.status(400).send({ msg: "Error al actualizar post" });
+    } else {
+      res.status(200).send({ msg: "Post actualizado" });
+    }
+  });
+}
+
+function deletePost(req, res) {
+  const { id } = req.params;
+
+  Post.findByIdAndDelete(id, (error) => {
+    if (error) {
+      res.status(400).send({ msg: "Error al eliminar post" });
+    } else {
+      res.status(200).send({ msg: "Post Eliminado" });
+    }
+  });
+}
+
+module.exports = { createPost, getPosts, updatePost, deletePost };
