@@ -1,7 +1,10 @@
 const Course = require("../models/course");
+const image = require("../utils/image");
 
 async function createCourse(req, res) {
   const course = new Course(req.body);
+  const imagePath = image.getFilePath(req.files.miniature);
+  course.miniature = imagePath;
   course.save((error, courseStored) => {
     if (error) {
       res.status(400).send({ msg: "Error al crear curso" });
@@ -12,21 +15,19 @@ async function createCourse(req, res) {
 }
 
 async function getCourses(req, res) {
-  const { active } = req.query;
+  const { page = 1, limit = 10 } = req.query;
+  const options = {
+    page: parseInt(page),
+    limit: parseInt(limit),
+  };
 
-  let response = null;
-
-  if (active === undefined) {
-    response = await Course.find();
-  } else {
-    response = await Course.finf({ active });
-  }
-
-  if (!response) {
-    res.status(400).send({ nsg: "No se ha encontrado ningun curso" });
-  } else {
-    res.status(200).send(response);
-  }
+  Course.paginate({}, options, (error, courses) => {
+    if (error) {
+      res.status(400).send({ msg: "Course not found" });
+    } else {
+      res.status(200).send(courses);
+    }
+  });
 }
 
 module.exports = {
