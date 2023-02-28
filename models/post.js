@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate");
 
 const PostSchema = mongoose.Schema({
   title: String,
@@ -10,4 +11,7 @@ const PostSchema = mongoose.Schema({
   },
   created_at: Date,
 });
+
+PostSchema.plugin(mongoosePaginate);
+
 module.exports = mongoose.models("Post", PostSchema);
