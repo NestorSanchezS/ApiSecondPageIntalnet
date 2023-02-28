@@ -19,6 +19,7 @@ async function getCourses(req, res) {
   const options = {
     page: parseInt(page),
     limit: parseInt(limit),
+    sort: { created_at: "desc" },
   };
 
   Course.paginate({}, options, (error, courses) => {
