@@ -12,5 +12,10 @@ api.post(
   CourseController.createCourse
 );
 api.get("/course", CourseController.getCourses);
+api.patch(
+  "/course/:id",
+  [md_auth.asureAuth, md_upload],
+  CourseController.updateCourse
+);
 
 module.exports = api;
