@@ -14,5 +14,6 @@ api.patch(
   PostController.updatePost
 );
 api.delete("/post/:id", [md_auth.asureAuth], PostController.deletePost);
+api.get("/post/:path", PostController.getPost);
 
 module.exports = api;

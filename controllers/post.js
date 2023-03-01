@@ -61,4 +61,18 @@ function deletePost(req, res) {
   });
 }
 
-module.exports = { createPost, getPosts, updatePost, deletePost };
+function getPost(req, res) {
+  const { path } = req.params;
+
+  Post.findOne({ path }, (error, postStored) => {
+    if (error) {
+      res.status(500).send({ msg: "Error del servidor" });
+    } else if (!postStored) {
+      res.status(200).send({ msg: "No se ha encontrado ningun post" });
+    } else {
+      res.status(200).send(postStored);
+    }
+  });
+}
+
+module.exports = { createPost, getPosts, updatePost, deletePost, getPost };
