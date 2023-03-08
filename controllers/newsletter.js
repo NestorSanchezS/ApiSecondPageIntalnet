@@ -32,4 +32,16 @@ function getEmails(req, res) {
     }
   });
 }
-module.exports = { suscribeEmail, getEmails };
+
+function deleteEmail(req, res) {
+  const { id } = req.params;
+
+  Newsletter.findByIdAndDelete(id, (error) => {
+    if (error) {
+      res.status(400).send({ msg: "Error al eliminar registro" });
+    } else {
+      res.status(200).send({ msg: "Eliminación correcta" });
+    }
+  });
+}
+module.exports = { suscribeEmail, getEmails, deleteEmail };
